@@ -1,6 +1,8 @@
 import React from "react";
 import logo from './logo.svg';
 import './App.css';
+import myNavbar from "./components/myNavbar";
+import Header from "./components/Header"
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -14,10 +16,12 @@ function App() {
   return (
 
     <div className="App">
-      <header className="App-header">
+      <Header />
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        
         <p>{!data ? "Loading..." : data}</p>
-      </header>
+      </header> */}
     </div>
   );
 }
