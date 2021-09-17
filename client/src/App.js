@@ -2,7 +2,9 @@ import React from "react";
 import logo from './logo.svg';
 import './App.css';
 import myNavbar from "./components/myNavbar";
-import Header from "./components/Header"
+import Header from "./components/Header";
+import FoodList from "./components/FoodList";
+import AddFood from "./components/AddFood";
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -17,9 +19,11 @@ function App() {
 
     <div className="App">
       <Header />
+      <AddFood />
+      <FoodList />
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        
+
         <p>{!data ? "Loading..." : data}</p>
       </header> */}
     </div>
