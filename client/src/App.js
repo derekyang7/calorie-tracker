@@ -5,6 +5,7 @@ import myNavbar from "./components/myNavbar";
 import Header from "./components/Header";
 import FoodList from "./components/FoodList";
 import AddFood from "./components/AddFood";
+import Total from "./components/Total"
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -21,6 +22,7 @@ function App() {
       <Header />
       <AddFood />
       <FoodList />
+      <Total />
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
