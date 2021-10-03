@@ -1,28 +1,28 @@
 import React from "react";
-import logo from './logo.svg';
 import './App.css';
-import myNavbar from "./components/myNavbar";
-import Header from "./components/Header";
-import FoodList from "./components/FoodList";
 import AddFood from "./components/AddFood";
+import FoodList from "./components/FoodList";
+import Header from "./components/Header";
 import Total from "./components/Total"
 
 function App() {
-  const [data, setData] = React.useState(null);
+  // const [data, setData] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+  // React.useEffect(() => {
+  //   fetch("/api")
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data.message));
+  // }, []);
 
   return (
 
     <div className="App">
       <Header />
-      <AddFood />
-      <FoodList />
-      <Total />
+      <div className="container">
+        <Total />
+        <FoodList />
+        <AddFood />
+      </div>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
