@@ -1,9 +1,11 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
-import AddFood from "./components/AddFood";
-import FoodList from "./components/FoodList";
-import Header from "./components/Header";
-import Total from "./components/Total"
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
+import SignUp from "./components/SignUp";
+import { GlobalProvider } from "./context/GlobalContext";
 
 function App() {
   // const [data, setData] = React.useState(null);
@@ -15,20 +17,16 @@ function App() {
   // }, []);
 
   return (
-
-    <div className="App">
-      <Header />
-      <div className="container">
-        <Total />
-        <FoodList />
-        <AddFood />
-      </div>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <p>{!data ? "Loading..." : data}</p>
-      </header> */}
-    </div>
+    <GlobalProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' exact element={<Home />} />
+            <Route path='login' element={<Login />} />
+            <Route path='sign-up' element={<SignUp />} />
+        </Routes>
+      </Router>
+    </GlobalProvider>
   );
 }
 
