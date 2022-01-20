@@ -1,10 +1,15 @@
-const Food = () => {
-    return (
-        <div>
-            <h1>Food</h1>
-        </div>
+import { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 
+const Food = ({ food }) => {
+    const { deleteFoodItem } = useContext(GlobalContext);
+
+    return (
+        <li>
+            {food.foodItem}: {food.amount}
+            <button className="delete" onClick={() => deleteFoodItem(food.id)}>x</button>
+        </li>
     )
 }
 
-export default Food
+export default Food;

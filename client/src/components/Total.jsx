@@ -8,4 +8,4 @@ const Total = () => {
     )
 }
 
-export default Total
+export default Total;
