@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 const AddFood = () => {
-    const [foodItem, setFoodItem] = useState('');
+    const [foodName, setFoodName] = useState('');
     const [amount, setAmount] = useState('');
 
     const { addFoodItem } = useContext(GlobalContext);
@@ -10,12 +10,11 @@ const AddFood = () => {
     const onSubmit = e => {
         e.preventDefault();
 
-        setFoodItem('');
+        setFoodName('');
         setAmount(0);
 
         const newFood = {
-            id: Math.floor(Math.random() * 100000000),
-            foodItem: foodItem,
+            text: foodName,
             amount: +amount
         }
 
@@ -27,8 +26,8 @@ const AddFood = () => {
             <h3>Add New Food</h3>
             <form onSubmit={onSubmit}>
                 <div className="form-control">
-                    <label htmlFor="text">Food Item</label>
-                    <input type="text" placeholder="Enter food item..." value={foodItem} onChange={(e) => setFoodItem(e.target.value)} required />
+                    <label htmlFor="text">Food Name</label>
+                    <input type="text" placeholder="Enter food name..." value={foodName} onChange={(e) => setFoodName(e.target.value)} required />
                 </div>
                 <div className="form-control">
                     <label htmlFor="amount">Number of Servings</label>

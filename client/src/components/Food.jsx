@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
-const Food = ({ food }) => {
+const Food = ({ foodItem }) => {
     const { deleteFoodItem } = useContext(GlobalContext);
 
     return (
         <li>
-            {food.foodItem}: {food.amount}
-            <button className="delete" onClick={() => deleteFoodItem(food.id)}>x</button>
+            {foodItem.text}: {foodItem.amount}
+            <button className="delete" onClick={() => deleteFoodItem(foodItem._id)}>x</button>
         </li>
     )
 }

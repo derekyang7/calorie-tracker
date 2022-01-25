@@ -1,36 +1,36 @@
 import { createContext, useReducer } from 'react';
+import axios from 'axios';
 
 const initialState = {
-  foods: [{
-    id: 1,
-    foodItem: 'Carrot',
-    amount: 1
-  },
-  {
-    id: 2,
-    foodItem: 'Celery',
-    amount: 2
-  },
-  {
-    id: 3,
-    foodItem: 'Donut',
-    amount: 3
-  }]
+  foodItems: [],
+  error: null,
+  loading: true
 }
 
 export const GlobalContext = createContext(initialState);
 
 const GlobalReducer = (state, action) => {
   switch (action.type) {
+    case 'GET_FOOD_ITEM':
+      return {
+        ...state,
+        loading: false,
+        foodItems: action.payload
+      }
     case 'ADD_FOOD_ITEM':
       return {
         ...state,
-        foods: [action.payload, ...state.foods]
+        foodItems: [...state.foodItems, action.payload]
       }
     case 'DELETE_FOOD_ITEM':
       return {
         ...state,
-        foods: state.foods.filter(food => food.id !== action.payload)
+        foodItems: state.foodItems.filter(food => food._id !== action.payload)
+      }
+    case 'ERROR':
+      return {
+        ...state,
+        error: action.payload
       }
     default:
       return state;
@@ -40,23 +40,63 @@ const GlobalReducer = (state, action) => {
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(GlobalReducer, initialState);
 
-  function addFoodItem(food) {
-    dispatch({
-      type: 'ADD_FOOD_ITEM',
-      payload: food
-    });
+  async function getFoodItems() {
+    try {
+      const res = await axios.get('/api/fooditems');
+      dispatch({
+        type: 'GET_FOOD_ITEM',
+        payload: res.data.data
+      });
+    } catch (err) {
+      dispatch({
+        type: 'ERROR',
+        payload: err.response.data.error
+      });
+    }
   }
 
-  function deleteFoodItem(id) {
-    dispatch({
-      type: 'DELETE_FOOD_ITEM',
-      payload: id
-    });
+  async function addFoodItem(food) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    try {
+      const res = await axios.post('/api/fooditems', food, config);
+      dispatch({
+        type: 'ADD_FOOD_ITEM',
+        payload: res.data.data
+      });
+    } catch (err) {
+      dispatch({
+        type: 'ERROR',
+        payload: err.response.data.error
+      });
+    }
+  }
+
+  async function deleteFoodItem(id) {
+    try {
+      await axios.delete(`/api/fooditems/${id}`)
+      dispatch({
+        type: 'DELETE_FOOD_ITEM',
+        payload: id
+      });
+    } catch (err) {
+      dispatch({
+        type: 'ERROR',
+        payload: err.response.data.error
+      });
+    }
   }
 
   return (
     <GlobalContext.Provider value={{
-      foods: state.foods,
+      foodItems: state.foodItems,
+      error: state.error,
+      loading: state.loading,
+      getFoodItems,
       addFoodItem,
       deleteFoodItem
     }}>

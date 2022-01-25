@@ -1,15 +1,20 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Food from './Food';
 import { GlobalContext } from '../context/GlobalContext';
 
 const FoodList = () => {
-    const { foods } = useContext(GlobalContext);
+    const { foodItems, getFoodItems } = useContext(GlobalContext);
+
+    useEffect(() => {
+        getFoodItems();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div>
             <h3>Food List</h3>
             <ul className="foodList">
-                {foods.map(food => <Food key={food.id} food={food} />)}
+                {foodItems.map(foodItem => <Food key={foodItem._id} foodItem={foodItem} />)}
             </ul>
         </div>
 
