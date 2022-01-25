@@ -2,18 +2,23 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Server for calorie tracker website",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Derek Yang",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^14.3.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.1.8",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "concurrently": "^7.0.0",
     "nodemon": "^2.0.12"
   }
 }
