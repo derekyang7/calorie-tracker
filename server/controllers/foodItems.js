@@ -19,7 +19,7 @@ exports.getFoodItems = async (req, res, next) => {
 
 exports.addFoodItem = async (req, res, next) => {
   try {
-    const { text, amount } = req.body;
+    const { text, amount, calories } = req.body;
 
     const foodItem = await FoodItem.create(req.body);
 
@@ -34,7 +34,7 @@ exports.addFoodItem = async (req, res, next) => {
       return res.status(400).json({
         success: false,
         error: messages
-      }); 
+      });
     } else {
       return res.status(500).json({
         success: false,

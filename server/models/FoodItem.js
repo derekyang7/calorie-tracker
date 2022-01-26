@@ -4,11 +4,15 @@ const FoodItemSchema = new mongoose.Schema({
   text: {
     type: String,
     trim: true,
-    required: [true, 'Please add some text']
+    required: [true, 'Please add a food name']
   },
   amount: {
     type: Number,
-    required: [true, 'Please add a positive number']
+    min: [1, 'Please add a positive number'],
+    required: [true, 'Please add a number']
+  },
+  calories: {
+    type: Number,
   },
   createdAt: {
     type: Date,
