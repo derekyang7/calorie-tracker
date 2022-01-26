@@ -6,7 +6,7 @@ const Food = ({ foodItem }) => {
 
     return (
         <li>
-            {foodItem.text}: {foodItem.amount}
+            {foodItem.text} ({foodItem.amount}): {foodItem.calories}
             <button className="delete" onClick={() => deleteFoodItem(foodItem._id)}>x</button>
         </li>
     )

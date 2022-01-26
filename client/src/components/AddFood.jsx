@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
+import { getCalories } from "../api";
 
 const AddFood = () => {
     const [foodName, setFoodName] = useState('');
@@ -7,20 +8,23 @@ const AddFood = () => {
 
     const { addFoodItem } = useContext(GlobalContext);
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
 
         setFoodName('');
         setAmount(0);
 
+        const caloriesPerServing = await getCalories(foodName);
+        const totalCalories = (caloriesPerServing * amount).toFixed(2);
         const newFood = {
             text: foodName,
-            amount: +amount
+            amount: +amount,
+            calories: totalCalories
         }
 
         addFoodItem(newFood);
-
     }
+
     return (
         <>
             <h3>Add New Food</h3>
