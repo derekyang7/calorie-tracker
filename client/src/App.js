@@ -8,13 +8,6 @@ import SignUp from "./components/SignUp";
 import { GlobalProvider } from "./context/GlobalContext";
 
 function App() {
-  // const [data, setData] = React.useState(null);
-
-  // React.useEffect(() => {
-  //   fetch("/api")
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data.message));
-  // }, []);
 
   return (
     <GlobalProvider>
